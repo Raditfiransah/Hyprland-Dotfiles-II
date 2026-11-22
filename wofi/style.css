@@ -1,0 +1,87 @@
+@import url('/home/radit/.cache/wal/colors-waybar.css');
+
+/* Global styles */
+window {
+  margin: 0px;
+  border: 2px solid alpha(@color7, 0.3);
+  border-radius: 12px;
+  background-color: alpha(@color0, 0.5); /* semi-transparent */
+  backdrop-filter: blur(15px); /* soft blur */
+  font-family: JetBrains Mono, monospace;
+  color: @color7;
+  box-shadow: 0 0 20px alpha(@color7, 0.15); /* subtle glow */
+}
+
+/* Input box */
+#input {
+  margin: 8px;
+  border: 1px solid alpha(@color7, 0.4);
+  color: @color7;
+  background-color: alpha(@color0, 0.4);
+  padding: 8px;
+  border-radius: 8px;
+  backdrop-filter: blur(8px);
+}
+
+#input::placeholder {
+  color: alpha(@color7, 0.6);
+}
+
+#input:focus {
+  border-color: @color8;
+  background-color: alpha(@color0, 0.6);
+}
+
+/* Inner box */
+#inner-box {
+  margin: 5px;
+  border: none;
+  color: @color7;
+  padding: 5px;
+}
+
+/* Outer box */
+#outer-box {
+  margin: 5px;
+  border: none;
+  padding: 5px;
+}
+
+/* Scroll area */
+#scroll {
+  margin: 0px;
+}
+
+/* Text styling */
+#text {
+  margin: 5px;
+  border: none;
+  color: @color7;
+  font-size: 14px;
+}
+
+#entry.activatable #text {
+  color: @color7;
+}
+
+/* Active entry */
+#entry:selected {
+  background-color: alpha(@color8, 0.5);
+  border-radius: 6px;
+  backdrop-filter: blur(10px);
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  transform: scale(1.02);
+}
+
+#entry:selected #text {
+  font-weight: bold;
+  color: @color7;
+}
+
+#entry:hover {
+  background-color: alpha(@color10, 0.4);
+}
+
+#entry:hover #text {
+  color: @color11;
+}

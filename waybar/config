@@ -1,0 +1,141 @@
+{
+    "layer": "top",
+    "position": "top",
+    "mod": "dock",
+    "exclusive": true,
+    "passthrough": false,
+    "gtk-layer-shell": true,
+    "reload_style_on_change": true,
+    
+    "margin-top": 5,
+    "margin-left": 10,
+    "margin-right": 10,
+    "spacing": 0,
+
+    "modules-left": [
+        "clock",
+        "group/apps",
+        "tray"
+    ],
+    
+    "modules-center": [
+        "hyprland/workspaces"
+    ],
+    
+    "modules-right": [
+        "cpu",
+        "memory",
+        "network",
+        "bluetooth",
+        "wireplumber",
+        "custom/backlight", // MENGGUNAKAN CUSTOM MODUL
+        "battery",
+        "custom/power"
+    ],
+
+    // --- CONFIGURATION ---
+
+    "hyprland/workspaces": {
+        "all-outputs": true,
+        "on-click": "activate-or-minimize",
+        "on-click-middle": "hyprctl dispatch killactive",
+        "on-scroll-up": "hyprctl dispatch workspace e-1",
+        "on-scroll-down": "hyprctl dispatch workspace e+1",
+        "format": "{icon}",
+        "persistent-workspaces": {
+            "1": [], "2": [], "3": [], "4": [], "5": []
+        },
+        "format-icons": {
+            "active": "",
+            "default": ""
+        }
+    },
+
+    "tray": {
+        "icon-size": 16,
+        "spacing": 10
+    },
+
+    "clock": {
+        "format": "{:%H:%M}",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>"
+    },
+
+    "group/apps": {
+        "orientation": "horizontal",
+        "modules": [
+            "custom/kitty",
+            "custom/firefox",
+            "custom/thunar",
+            "custom/code"
+        ]
+    },
+    "custom/kitty": { "format": "  ", "on-click": "kitty", "tooltip": false },
+    "custom/firefox": { "format": "  ", "on-click": "firefox", "tooltip": false },
+    "custom/thunar": { "format": "  ", "on-click": "thunar", "tooltip": false },
+    "custom/code": { "format": "  ", "on-click": "code", "tooltip": false },
+
+    "cpu": {
+        "format": " {usage}%",
+        "interval": 10,
+        "on-click": "ghostty -e btop"
+    },
+    "memory": {
+        "format": " {percentage}%",
+        "interval": 30,
+        "on-click": "ghostty -e btop"
+    },
+
+    "network": {
+        "format-wifi": "  {signalStrength}%",
+        "format-ethernet": "",
+        "format-disconnected": "",
+        "tooltip-format": "{essid}",
+        "on-click": "alacritty -e nmtui"
+    },
+    "bluetooth": {
+        "format": "",
+        "format-connected": " {device_alias}",
+        "format-disabled": "󰂲",
+        "on-click": "bluetoothctl power toggle",
+        "on-click-right": "blueman-manager",
+        "tooltip": true,
+        "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected"
+    },
+    "wireplumber": {
+    "format": "{icon} {volume}%",
+    "format-muted": "",
+    "format-icons": ["", "", ""],
+
+    "on-click": "pavucontrol",
+    "on-click-middle": "wpctl set-default @DEFAULT_AUDIO_SINK@",
+
+    "on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+",
+    "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+    },
+
+    // --- CUSTOM BACKLIGHT (Lebih Aman) ---
+    // Wajib install: sudo pacman -S brightnessctl
+    "custom/backlight": {
+        "exec": "brightnessctl -m | cut -d, -f4 | tr -d %", // Ambil persen
+        "format": " {}%",
+        "interval": 1, // Update tiap detik
+        "on-scroll-up": "brightnessctl set +5%",
+        "on-scroll-down": "brightnessctl set 5%-",
+        "tooltip": false
+    },
+
+    "battery": {
+        "states": { "warning": 30, "critical": 15 },
+        "format": "{icon} {capacity}%",
+        "format-charging": " {capacity}%",
+        "format-icons": ["", "", "", "", ""],
+        "on-click": "notify-send -u low 'Battery' \"$(cat /sys/class/power_supply/BAT1/capacity)% - $(cat /sys/class/power_supply/BAT1/status)\""
+    },
+
+    "custom/power": {
+        "format": "",
+        "tooltip": false,
+        "on-click": "wlogout"
+    }
+}

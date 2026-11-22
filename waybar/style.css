@@ -1,0 +1,81 @@
+/* === PYWAL IMPORT === */
+@import "../../.cache/wal/colors-waybar.css";
+
+/* === GLOBAL RESET === */
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 14px;
+    font-weight: bold;
+    min-height: 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+}
+
+window#waybar {
+    background: transparent;
+    color: @foreground;
+}
+
+/* === SPACER FIX (METODE PAKSA) === */
+/* Kita atur jarak untuk masing-masing modul secara spesifik */
+#cpu,
+#memory,
+#network,
+#wireplumber,
+#custom-backlight,
+#battery {
+    margin-left: 30px;  /* JARAK DIPERLEBAR JADI 20px */
+    color: @foreground;
+}
+
+/* === LEFT MODULES === */
+#clock {
+    color: @foreground;
+}
+
+#custom-kitty, #custom-firefox, #custom-thunar, #custom-code {
+    color: @foreground;
+    font-size: 14px;
+    margin-right: 10px;
+    opacity: 0.6;
+}
+
+#custom-kitty:hover, #custom-firefox:hover, #custom-thunar:hover, #custom-code:hover {
+    opacity: 1;
+    color: @color4;
+}
+
+/* === WORKSPACES === */
+#workspaces button {
+    padding: 0 5px;
+    color: #585b70;
+}
+
+#workspaces button.active {
+    color: @color4;
+    font-size: 16px;
+}
+
+/* === COLOR STATES === */
+#wireplumber.muted { color: @color1; }
+#battery.warning { color: @color3; }
+#battery.critical { 
+    color: @color1;
+    animation: blink 0.5s linear infinite alternate;
+}
+
+#custom-power {
+    color: @color1;
+    margin-left: 25px; /* Tombol power lebih jauh lagi */
+    margin-right: 20px;
+}
+
+@keyframes blink {
+    to { color: transparent; }
+}
+
+tooltip {
+    background: #1e1e2e;
+    border: 1px solid @color4;
+}
